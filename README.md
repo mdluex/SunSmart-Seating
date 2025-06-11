@@ -1,9 +1,9 @@
 
 
-# تقعد فين؟ (SunSmart Seating)
+[![GitHub - SunSmart Seating](https://img.shields.io/badge/GitHub-SunSmart%20Seating-blue?style=flat-square&logo=github)](https://github.com/mdluex/SunSmart-Seating)
+[![Live Demo - SunSmart Seating](https://img.shields.io/badge/Live%20Demo-SunSmart%20Seating-green?style=flat-square&logo=vercel)](https://sun-smart-seating.vercel.app/)
 
-**GitHub Repository:** [https://github.com/mdluex/SunSmart-Seating](https://github.com/mdluex/SunSmart-Seating)
-**Live Demo:** [https://sun-smart-seating.vercel.app/](https://sun-smart-seating.vercel.app/)
+# تقعد فين؟ (SunSmart Seating)
 
 **Description:**
 An application that helps you choose the best seat in transportation to avoid direct sunlight, based on your start/destination coordinates and travel time.

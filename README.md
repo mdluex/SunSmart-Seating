@@ -1,11 +1,11 @@
 
 
-# تقعد فين؟ (SunSmart Seating) - Coordinate Edition
+# تقعد فين؟ (SunSmart Seating)
 
-**Version:** V3 - Coordinate Edition
-**Author:** Mdluex
+**GitHub Repository:** [https://github.com/mdluex/SunSmart-Seating](https://github.com/mdluex/SunSmart-Seating)
+**Live Demo:** [https://sun-smart-seating.vercel.app/](https://sun-smart-seating.vercel.app/)
 
-**Description (from metadata):**
+**Description:**
 An application that helps you choose the best seat in transportation to avoid direct sunlight, based on your start/destination coordinates and travel time.
 (تطبيق يساعدك على اختيار أفضل مقعد في المواصلات لتجنب أشعة الشمس المباشرة، بناءً على إحداثيات نقطة الانطلاق والوجهة ووقت الرحلة.)
 
@@ -17,7 +17,7 @@ An application that helps you choose the best seat in transportation to avoid di
 4.  [How to Use](#how-to-use)
 5.  [Technical Stack](#technical-stack)
 6.  [Project Structure](#project-structure)
-7.  [Setup and Running](#setup-and-running)
+7.  [Setup and Running Locally](#setup-and-running-locally)
 8.  [Key Files and Their Purpose](#key-files-and-their-purpose)
 9.  [Fonts](#fonts)
 10. [Accessibility](#accessibility)
@@ -91,7 +91,7 @@ The seat recommendation is based on two main calculations:
 *   **Mapping:** Google Maps JavaScript API (for location input and interactive map)
 *   **Core Logic:** Custom positional calculation functions (bearing, sun position relative to travel)
 *   **State Management:** React Context API (for language)
-*   **Build/Module System:** ES Modules (via `importmap` in `index.html`)
+*   **Build/Module System:** ES Modules (via `importmap` in `index.html`, using `esm.sh` for React and `@google/genai`)
 
 ## Project Structure
 
@@ -106,13 +106,13 @@ The seat recommendation is based on two main calculations:
 ├── translations.ts
 ├── components/
 │   ├── Button.tsx
-│   ├── Input.tsx
+│   ├── Input.tsx  // (General purpose input, not directly used for coordinates in App.tsx now)
 │   ├── LanguageSwitcher.tsx
 │   ├── LoadingIcon.tsx
 │   ├── MapInput.tsx
 │   ├── MapModal.tsx
 │   ├── Modal.tsx
-│   ├── Select.tsx
+│   ├── Select.tsx // (General purpose select, not currently used in App.tsx)
 │   ├── SuggestionCard.tsx
 │   ├── SunIcon.tsx
 │   ├── TimePickerInput.tsx
@@ -126,26 +126,47 @@ The seat recommendation is based on two main calculations:
     └── sunCalculatorService.ts
 ```
 
-## Setup and Running
+## Setup and Running Locally
 
-This application is designed to run directly in a browser that supports ES Modules.
+This application is designed to run directly in a browser that supports ES Modules, without requiring a typical Node.js build process (like `npm install` or `npm start`).
 
-1.  **Google Maps API Key:**
-    *   The `index.html` file contains a placeholder for the Google Maps JavaScript API key:
+1.  **Clone the Repository:**
+    First, clone the repository to your local machine using Git:
+    ```bash
+    git clone https://github.com/mdluex/SunSmart-Seating.git
+    ```
+    Navigate into the cloned directory:
+    ```bash
+    cd SunSmart-Seating
+    ```
+
+2.  **Google Maps API Key (Crucial):**
+    *   Open the `index.html` file in a text editor.
+    *   Locate the following line:
         ```html
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&libraries=places"></script>
         ```
     *   **You MUST replace `AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao` with your own valid Google Maps JavaScript API key.**
-    *   Ensure your API key is enabled for the "Maps JavaScript API" and "Places API" in the Google Cloud Console, and has appropriate billing setup and API restrictions (if any).
+    *   Ensure your API key is enabled for the "Maps JavaScript API" and "Places API" in the Google Cloud Console. You'll also need to have billing enabled for your Google Cloud project and consider setting API restrictions (e.g., HTTP referrers) for security.
 
-2.  **Open in Browser:**
-    *   Once the API key is correctly set in `index.html`, simply open the `index.html` file in a modern web browser (e.g., Chrome, Firefox, Edge, Safari).
+3.  **Running the Application:**
+    *   **Directly opening `index.html`:** You can simply open the `index.html` file in a modern web browser (e.g., Chrome, Firefox, Edge, Safari).
+    *   **Using a local HTTP server (Recommended for development):** For a better development experience and to avoid potential issues with browser security policies (like CORS, though less likely with this setup), it's recommended to serve the files using a local HTTP server.
+        *   **If you have Python installed:**
+            Navigate to the project directory in your terminal and run:
+            ```bash
+            python -m http.server
+            ```
+            Then open `http://localhost:8000` (or the port indicated) in your browser.
+        *   **Using VS Code Live Server extension:** If you're using Visual Studio Code, you can install the "Live Server" extension, right-click on `index.html` in the explorer, and select "Open with Live Server".
+        *   **Other tools:** Many other simple HTTP server tools are available.
 
-    *   No build step or local server is strictly required due to the use of ES Modules via `esm.sh` and direct script includes for Tailwind CSS and Google Fonts. For development, however, using a simple local server (like `live-server` for VS Code) can help with features like hot reloading.
-
+    **Note:** This project does **not** use `npm` or `yarn` for package management or a build step like Webpack/Vite in its current configuration. React and other dependencies are loaded directly via CDNs (`esm.sh`) as specified in the `importmap` in `index.html`.
 
 ## Key Files and Their Purpose
 
+*   **`index.html`**: The main HTML file. It includes the Google Maps API, Tailwind CSS, Google Fonts, and the `importmap` for ES module resolution.
+*   **`index.tsx`**: The entry point for the React application, rendering the `App` component.
 *   **`App.tsx`**: The main application component. It handles state for inputs, manages the form submission, and displays suggestions or errors. The footer in this file uses `t('poweredByNew')` which in `translations.ts` resolves to "Made by Mdluex".
 *   **`services/sunCalculatorService.ts`**: Contains the core logic for:
     *   `calculateBearing`: Determines the direction of travel.
@@ -158,6 +179,8 @@ This application is designed to run directly in a browser that supports ES Modul
 *   **`components/TimePickerInput.tsx` & `components/TimePickerModal.tsx`**: Custom components for a user-friendly time selection experience.
 *   **`translations.ts`**: A crucial file holding all user-facing strings for both English and Arabic.
 *   **`contexts/LanguageContext.tsx`**: Provides a global way to manage and switch the application's language.
+*   **`types.ts`**: Defines TypeScript types and enums used throughout the application.
+*   **`metadata.json`**: Provides metadata for the application environment it runs in.
 
 ## Fonts
 
@@ -195,6 +218,3 @@ The application incorporates several accessibility (a11y) features:
     *   Daylight Saving Time.
     For most general use cases within a hemisphere, this provides a reasonable estimate.
 
----
-
-This README aims to provide a comprehensive guide to the SunSmart Seating application.

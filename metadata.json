@@ -1,0 +1,6 @@
+{
+  "name": "تقعد فين؟ (SunSmart Seating) V3 - Coordinate Edition",
+  "description": "تطبيق يساعدك على اختيار أفضل مقعد في المواصلات لتجنب أشعة الشمس المباشرة، بناءً على إحداثيات نقطة الانطلاق والوجهة ووقت الرحلة. (An application that helps you choose the best seat in transportation to avoid direct sunlight, based on your start/destination coordinates and travel time.)",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تقعد فين؟</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* For browsers that support scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px; /* Default width */
+      height: 8px; /* Default height */
+    }
+    ::-webkit-scrollbar-track {
+      background: #e2e8f0; /* slate-200 */
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #64748b; /* slate-500 */
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569; /* slate-600 */
+    }
+
+    /* More specific for thin scrollbars if needed */
+    .scrollbar-thin::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background-color: #94a3b8; /* slate-400 */
+      border-radius: 3px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+      background-color: #64748b; /* slate-500 */
+    }
+    .scrollbar-thin::-webkit-scrollbar-track {
+      background-color: #f1f5f9; /* slate-100 or a slightly darker variant like slate-200 */
+    }
+
+
+    /* Firefox scrollbar styling */
+    html {
+      scrollbar-width: thin; /* Can be 'auto', 'thin', or 'none' */
+      scrollbar-color: #64748b #e2e8f0; /* thumb track */
+    }
+    .scrollbar-thin { /* Apply to specific elements for Firefox */
+        scrollbar-width: thin;
+        scrollbar-color: #94a3b8 #f1f5f9; /* thumb track for thin version */
+    }
+
+
+    /* Custom selection color */
+    ::selection {
+        background-color: #fdba74; /* Tailwind orange-300 */
+        color: #7c2d12; /* Tailwind orange-900 */
+    }
+    ::-moz-selection { /* Firefox */
+        background-color: #fdba74;
+        color: #7c2d12;
+    }
+
+    /* Override browser autofill styles */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px white inset !important; /* Keep background white */
+        -webkit-text-fill-color: #1e293b !important; /* Match text-slate-800 */
+        transition: background-color 5000s ease-in-out 0s; /* Optional: Helps maintain style persistence */
+    }
+    /* For textareas if you use them similarly */
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    textarea:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+        -webkit-text-fill-color: #1e293b !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    /* Ensure Google Maps API error messages are visible */
+    .gm-err-container, .gm-style-moc {
+        z-index: 9999 !important;
+    }
+
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.4.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-slate-100">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&libraries=places"></script>
+</body>
+</html>
